@@ -1,0 +1,997 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RentCarModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="Brand_id" />
+          </Key>
+          <Property Name="Brand_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="55" Nullable="false" />
+          <Property Name="State" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="Car_id" />
+          </Key>
+          <Property Name="Car_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Chassis" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="license_plate" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="Type_car_id" Type="int" Nullable="false" />
+          <Property Name="Brand_id" Type="int" Nullable="false" />
+          <Property Name="Fuel_id" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="State" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Client_id" />
+          </Key>
+          <Property Name="Client_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="Identification_card" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="credit_card" Type="nchar" MaxLength="35" Nullable="false" />
+          <Property Name="credit_limit" Type="int" Nullable="false" />
+          <Property Name="Person_type" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="State" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Employee_id" />
+          </Key>
+          <Property Name="Employee_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="Identification_card" Type="nchar" MaxLength="35" Nullable="false" />
+          <Property Name="working_hours" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="Comission_percentaje" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="date_admission" Type="date" Nullable="false" />
+          <Property Name="State" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inspection">
+          <Key>
+            <PropertyRef Name="Inspection_id" />
+          </Key>
+          <Property Name="Inspection_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Car_id" Type="int" Nullable="false" />
+          <Property Name="Client_id" Type="int" Nullable="false" />
+          <Property Name="is_dent" Type="bit" Nullable="false" />
+          <Property Name="Fuel_id" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="replacement_rubber" Type="bit" Nullable="false" />
+          <Property Name="is_gat" Type="bit" Nullable="false" />
+          <Property Name="is_broken_glass" Type="bit" Nullable="false" />
+          <Property Name="state_rubber1" Type="bit" Nullable="false" />
+          <Property Name="state_rubber2" Type="bit" Nullable="false" />
+          <Property Name="state_rubber3" Type="bit" Nullable="false" />
+          <Property Name="state_rubber4" Type="bit" Nullable="false" />
+          <Property Name="comment" Type="nchar" MaxLength="255" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="state" Type="bit" Nullable="false" />
+          <Property Name="Employee_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inspection_employee">
+          <Key>
+            <PropertyRef Name="inspection_employee_id" />
+          </Key>
+          <Property Name="inspection_employee_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Employee_id" Type="int" Nullable="false" />
+          <Property Name="Inspection_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Model_car">
+          <Key>
+            <PropertyRef Name="Model_id" />
+          </Key>
+          <Property Name="Model_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Brand_id" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="255" Nullable="false" />
+          <Property Name="State" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rent_Devolution">
+          <Key>
+            <PropertyRef Name="Rent_id" />
+          </Key>
+          <Property Name="Rent_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Employee_id" Type="int" Nullable="false" />
+          <Property Name="Car_id" Type="int" Nullable="false" />
+          <Property Name="Client_id" Type="int" Nullable="false" />
+          <Property Name="date_rent" Type="date" Nullable="false" />
+          <Property Name="date_devolution" Type="date" />
+          <Property Name="Cost" Type="int" Nullable="false" />
+          <Property Name="days" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="nchar" MaxLength="255" />
+          <Property Name="State" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Type_car">
+          <Key>
+            <PropertyRef Name="Type_car_id" />
+          </Key>
+          <Property Name="Type_car_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="55" Nullable="false" />
+          <Property Name="State" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Type_fuel">
+          <Key>
+            <PropertyRef Name="Fuel_id" />
+          </Key>
+          <Property Name="Fuel_id" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="State" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="User_id" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="Password" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="state" Type="bit" Nullable="false" />
+          <Property Name="Employee_id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Car_Brand">
+          <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+          <End Role="Car" Type="Self.Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="Brand_id" />
+            </Principal>
+            <Dependent Role="Car">
+              <PropertyRef Name="Brand_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Car_Type_car">
+          <End Role="Type_car" Type="Self.Type_car" Multiplicity="1" />
+          <End Role="Car" Type="Self.Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_car">
+              <PropertyRef Name="Type_car_id" />
+            </Principal>
+            <Dependent Role="Car">
+              <PropertyRef Name="Type_car_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Car_Type_fuel">
+          <End Role="Type_fuel" Type="Self.Type_fuel" Multiplicity="1" />
+          <End Role="Car" Type="Self.Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_fuel">
+              <PropertyRef Name="Fuel_id" />
+            </Principal>
+            <Dependent Role="Car">
+              <PropertyRef Name="Fuel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspection_Car">
+          <End Role="Car" Type="Self.Car" Multiplicity="1" />
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="Car_id" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="Car_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspection_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Client_id" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="Client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspection_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Employee_id" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="Employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspection_employee_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Inspection_employee" Type="Self.Inspection_employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Employee_id" />
+            </Principal>
+            <Dependent Role="Inspection_employee">
+              <PropertyRef Name="Employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspection_employee_Inspection">
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="1" />
+          <End Role="Inspection_employee" Type="Self.Inspection_employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspection">
+              <PropertyRef Name="Inspection_id" />
+            </Principal>
+            <Dependent Role="Inspection_employee">
+              <PropertyRef Name="Inspection_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspection_Employee1">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Employee_id" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="Employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspection_Type_fuel">
+          <End Role="Type_fuel" Type="Self.Type_fuel" Multiplicity="1" />
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_fuel">
+              <PropertyRef Name="Fuel_id" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="Fuel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Model_Brand">
+          <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+          <End Role="Model_car" Type="Self.Model_car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="Brand_id" />
+            </Principal>
+            <Dependent Role="Model_car">
+              <PropertyRef Name="Brand_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rent_Devolution_Car">
+          <End Role="Car" Type="Self.Car" Multiplicity="1" />
+          <End Role="Rent_Devolution" Type="Self.Rent_Devolution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="Car_id" />
+            </Principal>
+            <Dependent Role="Rent_Devolution">
+              <PropertyRef Name="Car_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rent_Devolution_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Rent_Devolution" Type="Self.Rent_Devolution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Client_id" />
+            </Principal>
+            <Dependent Role="Rent_Devolution">
+              <PropertyRef Name="Client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rent_Devolution_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Rent_Devolution" Type="Self.Rent_Devolution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Employee_id" />
+            </Principal>
+            <Dependent Role="Rent_Devolution">
+              <PropertyRef Name="Employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Employee_id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="Employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RentCarModelStoreContainer">
+          <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Car" EntityType="Self.Car" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inspection" EntityType="Self.Inspection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inspection_employee" EntityType="Self.Inspection_employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Model_car" EntityType="Self.Model_car" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rent_Devolution" EntityType="Self.Rent_Devolution" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_car" EntityType="Self.Type_car" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_fuel" EntityType="Self.Type_fuel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Car_Brand" Association="Self.FK_Car_Brand">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="Car" EntitySet="Car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Car_Type_car" Association="Self.FK_Car_Type_car">
+            <End Role="Type_car" EntitySet="Type_car" />
+            <End Role="Car" EntitySet="Car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Car_Type_fuel" Association="Self.FK_Car_Type_fuel">
+            <End Role="Type_fuel" EntitySet="Type_fuel" />
+            <End Role="Car" EntitySet="Car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_Car" Association="Self.FK_Inspection_Car">
+            <End Role="Car" EntitySet="Car" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_Client" Association="Self.FK_Inspection_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_Employee" Association="Self.FK_Inspection_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_employee_Employee" Association="Self.FK_Inspection_employee_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Inspection_employee" EntitySet="Inspection_employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_employee_Inspection" Association="Self.FK_Inspection_employee_Inspection">
+            <End Role="Inspection" EntitySet="Inspection" />
+            <End Role="Inspection_employee" EntitySet="Inspection_employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_Employee1" Association="Self.FK_Inspection_Employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_Type_fuel" Association="Self.FK_Inspection_Type_fuel">
+            <End Role="Type_fuel" EntitySet="Type_fuel" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Model_Brand" Association="Self.FK_Model_Brand">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="Model_car" EntitySet="Model_car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rent_Devolution_Car" Association="Self.FK_Rent_Devolution_Car">
+            <End Role="Car" EntitySet="Car" />
+            <End Role="Rent_Devolution" EntitySet="Rent_Devolution" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rent_Devolution_Client" Association="Self.FK_Rent_Devolution_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Rent_Devolution" EntitySet="Rent_Devolution" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rent_Devolution_Employee" Association="Self.FK_Rent_Devolution_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Rent_Devolution" EntitySet="Rent_Devolution" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Employee" Association="Self.FK_User_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RentCarModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="Brand_id" />
+          </Key>
+          <Property Name="Brand_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="55" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Car" Relationship="Self.FK_Car_Brand" FromRole="Brand" ToRole="Car" />
+          <NavigationProperty Name="Model_car" Relationship="Self.FK_Model_Brand" FromRole="Brand" ToRole="Model_car" />
+        </EntityType>
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="Car_id" />
+          </Key>
+          <Property Name="Car_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Chassis" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="license_plate" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Type_car_id" Type="Int32" Nullable="false" />
+          <Property Name="Brand_id" Type="Int32" Nullable="false" />
+          <Property Name="Fuel_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Brand" Relationship="Self.FK_Car_Brand" FromRole="Car" ToRole="Brand" />
+          <NavigationProperty Name="Type_car" Relationship="Self.FK_Car_Type_car" FromRole="Car" ToRole="Type_car" />
+          <NavigationProperty Name="Type_fuel" Relationship="Self.FK_Car_Type_fuel" FromRole="Car" ToRole="Type_fuel" />
+          <NavigationProperty Name="Inspection" Relationship="Self.FK_Inspection_Car" FromRole="Car" ToRole="Inspection" />
+          <NavigationProperty Name="Rent_Devolution" Relationship="Self.FK_Rent_Devolution_Car" FromRole="Car" ToRole="Rent_Devolution" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Client_id" />
+          </Key>
+          <Property Name="Client_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Identification_card" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="credit_card" Type="String" MaxLength="35" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="credit_limit" Type="Int32" Nullable="false" />
+          <Property Name="Person_type" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Inspection" Relationship="Self.FK_Inspection_Client" FromRole="Client" ToRole="Inspection" />
+          <NavigationProperty Name="Rent_Devolution" Relationship="Self.FK_Rent_Devolution_Client" FromRole="Client" ToRole="Rent_Devolution" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Employee_id" />
+          </Key>
+          <Property Name="Employee_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Identification_card" Type="String" MaxLength="35" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="working_hours" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Comission_percentaje" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="date_admission" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Inspection" Relationship="Self.FK_Inspection_Employee" FromRole="Employee" ToRole="Inspection" />
+          <NavigationProperty Name="Inspection_employee" Relationship="Self.FK_Inspection_employee_Employee" FromRole="Employee" ToRole="Inspection_employee" />
+          <NavigationProperty Name="Inspection1" Relationship="Self.FK_Inspection_Employee1" FromRole="Employee" ToRole="Inspection" />
+          <NavigationProperty Name="Rent_Devolution" Relationship="Self.FK_Rent_Devolution_Employee" FromRole="Employee" ToRole="Rent_Devolution" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Employee" FromRole="Employee" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Inspection">
+          <Key>
+            <PropertyRef Name="Inspection_id" />
+          </Key>
+          <Property Name="Inspection_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Car_id" Type="Int32" Nullable="false" />
+          <Property Name="Client_id" Type="Int32" Nullable="false" />
+          <Property Name="is_dent" Type="Boolean" Nullable="false" />
+          <Property Name="Fuel_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="replacement_rubber" Type="Boolean" Nullable="false" />
+          <Property Name="is_gat" Type="Boolean" Nullable="false" />
+          <Property Name="is_broken_glass" Type="Boolean" Nullable="false" />
+          <Property Name="state_rubber1" Type="Boolean" Nullable="false" />
+          <Property Name="state_rubber2" Type="Boolean" Nullable="false" />
+          <Property Name="state_rubber3" Type="Boolean" Nullable="false" />
+          <Property Name="state_rubber4" Type="Boolean" Nullable="false" />
+          <Property Name="comment" Type="String" MaxLength="255" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="state" Type="Boolean" Nullable="false" />
+          <Property Name="Employee_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Car" Relationship="Self.FK_Inspection_Car" FromRole="Inspection" ToRole="Car" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Inspection_Client" FromRole="Inspection" ToRole="Client" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Inspection_Employee" FromRole="Inspection" ToRole="Employee" />
+          <NavigationProperty Name="Employee1" Relationship="Self.FK_Inspection_Employee1" FromRole="Inspection" ToRole="Employee" />
+          <NavigationProperty Name="Inspection_employee" Relationship="Self.FK_Inspection_employee_Inspection" FromRole="Inspection" ToRole="Inspection_employee" />
+          <NavigationProperty Name="Type_fuel" Relationship="Self.FK_Inspection_Type_fuel" FromRole="Inspection" ToRole="Type_fuel" />
+        </EntityType>
+        <EntityType Name="Inspection_employee">
+          <Key>
+            <PropertyRef Name="inspection_employee_id" />
+          </Key>
+          <Property Name="inspection_employee_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_id" Type="Int32" Nullable="false" />
+          <Property Name="Inspection_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Inspection_employee_Employee" FromRole="Inspection_employee" ToRole="Employee" />
+          <NavigationProperty Name="Inspection" Relationship="Self.FK_Inspection_employee_Inspection" FromRole="Inspection_employee" ToRole="Inspection" />
+        </EntityType>
+        <EntityType Name="Model_car">
+          <Key>
+            <PropertyRef Name="Model_id" />
+          </Key>
+          <Property Name="Model_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Brand_id" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Brand" Relationship="Self.FK_Model_Brand" FromRole="Model_car" ToRole="Brand" />
+        </EntityType>
+        <EntityType Name="Rent_Devolution">
+          <Key>
+            <PropertyRef Name="Rent_id" />
+          </Key>
+          <Property Name="Rent_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_id" Type="Int32" Nullable="false" />
+          <Property Name="Car_id" Type="Int32" Nullable="false" />
+          <Property Name="Client_id" Type="Int32" Nullable="false" />
+          <Property Name="date_rent" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="date_devolution" Type="DateTime" Precision="0" />
+          <Property Name="Cost" Type="Int32" Nullable="false" />
+          <Property Name="days" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Car" Relationship="Self.FK_Rent_Devolution_Car" FromRole="Rent_Devolution" ToRole="Car" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Rent_Devolution_Client" FromRole="Rent_Devolution" ToRole="Client" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Rent_Devolution_Employee" FromRole="Rent_Devolution" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Type_car">
+          <Key>
+            <PropertyRef Name="Type_car_id" />
+          </Key>
+          <Property Name="Type_car_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="55" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Car" Relationship="Self.FK_Car_Type_car" FromRole="Type_car" ToRole="Car" />
+        </EntityType>
+        <EntityType Name="Type_fuel">
+          <Key>
+            <PropertyRef Name="Fuel_id" />
+          </Key>
+          <Property Name="Fuel_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Car" Relationship="Self.FK_Car_Type_fuel" FromRole="Type_fuel" ToRole="Car" />
+          <NavigationProperty Name="Inspection" Relationship="Self.FK_Inspection_Type_fuel" FromRole="Type_fuel" ToRole="Inspection" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="User_id" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="state" Type="Boolean" Nullable="false" />
+          <Property Name="Employee_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_User_Employee" FromRole="User" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_Car_Brand">
+          <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+          <End Role="Car" Type="Self.Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="Brand_id" />
+            </Principal>
+            <Dependent Role="Car">
+              <PropertyRef Name="Brand_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Model_Brand">
+          <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+          <End Role="Model_car" Type="Self.Model_car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="Brand_id" />
+            </Principal>
+            <Dependent Role="Model_car">
+              <PropertyRef Name="Brand_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Car_Type_car">
+          <End Role="Type_car" Type="Self.Type_car" Multiplicity="1" />
+          <End Role="Car" Type="Self.Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_car">
+              <PropertyRef Name="Type_car_id" />
+            </Principal>
+            <Dependent Role="Car">
+              <PropertyRef Name="Type_car_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Car_Type_fuel">
+          <End Role="Type_fuel" Type="Self.Type_fuel" Multiplicity="1" />
+          <End Role="Car" Type="Self.Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_fuel">
+              <PropertyRef Name="Fuel_id" />
+            </Principal>
+            <Dependent Role="Car">
+              <PropertyRef Name="Fuel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspection_Car">
+          <End Role="Car" Type="Self.Car" Multiplicity="1" />
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="Car_id" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="Car_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rent_Devolution_Car">
+          <End Role="Car" Type="Self.Car" Multiplicity="1" />
+          <End Role="Rent_Devolution" Type="Self.Rent_Devolution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="Car_id" />
+            </Principal>
+            <Dependent Role="Rent_Devolution">
+              <PropertyRef Name="Car_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspection_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Client_id" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="Client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rent_Devolution_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Rent_Devolution" Type="Self.Rent_Devolution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Client_id" />
+            </Principal>
+            <Dependent Role="Rent_Devolution">
+              <PropertyRef Name="Client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspection_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Employee_id" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="Employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspection_employee_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Inspection_employee" Type="Self.Inspection_employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Employee_id" />
+            </Principal>
+            <Dependent Role="Inspection_employee">
+              <PropertyRef Name="Employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspection_Employee1">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Employee_id" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="Employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rent_Devolution_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Rent_Devolution" Type="Self.Rent_Devolution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Employee_id" />
+            </Principal>
+            <Dependent Role="Rent_Devolution">
+              <PropertyRef Name="Employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Employee_id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="Employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspection_employee_Inspection">
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="1" />
+          <End Role="Inspection_employee" Type="Self.Inspection_employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspection">
+              <PropertyRef Name="Inspection_id" />
+            </Principal>
+            <Dependent Role="Inspection_employee">
+              <PropertyRef Name="Inspection_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspection_Type_fuel">
+          <End Role="Type_fuel" Type="Self.Type_fuel" Multiplicity="1" />
+          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_fuel">
+              <PropertyRef Name="Fuel_id" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="Fuel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RentCarEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Brand" EntityType="Self.Brand" />
+          <EntitySet Name="Car" EntityType="Self.Car" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="Inspection" EntityType="Self.Inspection" />
+          <EntitySet Name="Inspection_employee" EntityType="Self.Inspection_employee" />
+          <EntitySet Name="Model_car" EntityType="Self.Model_car" />
+          <EntitySet Name="Rent_Devolution" EntityType="Self.Rent_Devolution" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Type_car" EntityType="Self.Type_car" />
+          <EntitySet Name="Type_fuel" EntityType="Self.Type_fuel" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_Car_Brand" Association="Self.FK_Car_Brand">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="Car" EntitySet="Car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Model_Brand" Association="Self.FK_Model_Brand">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="Model_car" EntitySet="Model_car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Car_Type_car" Association="Self.FK_Car_Type_car">
+            <End Role="Type_car" EntitySet="Type_car" />
+            <End Role="Car" EntitySet="Car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Car_Type_fuel" Association="Self.FK_Car_Type_fuel">
+            <End Role="Type_fuel" EntitySet="Type_fuel" />
+            <End Role="Car" EntitySet="Car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_Car" Association="Self.FK_Inspection_Car">
+            <End Role="Car" EntitySet="Car" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rent_Devolution_Car" Association="Self.FK_Rent_Devolution_Car">
+            <End Role="Car" EntitySet="Car" />
+            <End Role="Rent_Devolution" EntitySet="Rent_Devolution" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_Client" Association="Self.FK_Inspection_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rent_Devolution_Client" Association="Self.FK_Rent_Devolution_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Rent_Devolution" EntitySet="Rent_Devolution" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_Employee" Association="Self.FK_Inspection_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_employee_Employee" Association="Self.FK_Inspection_employee_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Inspection_employee" EntitySet="Inspection_employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_Employee1" Association="Self.FK_Inspection_Employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rent_Devolution_Employee" Association="Self.FK_Rent_Devolution_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Rent_Devolution" EntitySet="Rent_Devolution" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Employee" Association="Self.FK_User_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_employee_Inspection" Association="Self.FK_Inspection_employee_Inspection">
+            <End Role="Inspection" EntitySet="Inspection" />
+            <End Role="Inspection_employee" EntitySet="Inspection_employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_Type_fuel" Association="Self.FK_Inspection_Type_fuel">
+            <End Role="Type_fuel" EntitySet="Type_fuel" />
+            <End Role="Inspection" EntitySet="Inspection" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RentCarModelStoreContainer" CdmEntityContainer="RentCarEntities">
+          <EntitySetMapping Name="Brand">
+            <EntityTypeMapping TypeName="RentCarModel.Brand">
+              <MappingFragment StoreEntitySet="Brand">
+                <ScalarProperty Name="Brand_id" ColumnName="Brand_id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Car">
+            <EntityTypeMapping TypeName="RentCarModel.Car">
+              <MappingFragment StoreEntitySet="Car">
+                <ScalarProperty Name="Car_id" ColumnName="Car_id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Chassis" ColumnName="Chassis" />
+                <ScalarProperty Name="license_plate" ColumnName="license_plate" />
+                <ScalarProperty Name="Type_car_id" ColumnName="Type_car_id" />
+                <ScalarProperty Name="Brand_id" ColumnName="Brand_id" />
+                <ScalarProperty Name="Fuel_id" ColumnName="Fuel_id" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="RentCarModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Client_id" ColumnName="Client_id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Identification_card" ColumnName="Identification_card" />
+                <ScalarProperty Name="credit_card" ColumnName="credit_card" />
+                <ScalarProperty Name="credit_limit" ColumnName="credit_limit" />
+                <ScalarProperty Name="Person_type" ColumnName="Person_type" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="RentCarModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Employee_id" ColumnName="Employee_id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Identification_card" ColumnName="Identification_card" />
+                <ScalarProperty Name="working_hours" ColumnName="working_hours" />
+                <ScalarProperty Name="Comission_percentaje" ColumnName="Comission_percentaje" />
+                <ScalarProperty Name="date_admission" ColumnName="date_admission" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inspection">
+            <EntityTypeMapping TypeName="RentCarModel.Inspection">
+              <MappingFragment StoreEntitySet="Inspection">
+                <ScalarProperty Name="Inspection_id" ColumnName="Inspection_id" />
+                <ScalarProperty Name="Car_id" ColumnName="Car_id" />
+                <ScalarProperty Name="Client_id" ColumnName="Client_id" />
+                <ScalarProperty Name="is_dent" ColumnName="is_dent" />
+                <ScalarProperty Name="Fuel_id" ColumnName="Fuel_id" />
+                <ScalarProperty Name="replacement_rubber" ColumnName="replacement_rubber" />
+                <ScalarProperty Name="is_gat" ColumnName="is_gat" />
+                <ScalarProperty Name="is_broken_glass" ColumnName="is_broken_glass" />
+                <ScalarProperty Name="state_rubber1" ColumnName="state_rubber1" />
+                <ScalarProperty Name="state_rubber2" ColumnName="state_rubber2" />
+                <ScalarProperty Name="state_rubber3" ColumnName="state_rubber3" />
+                <ScalarProperty Name="state_rubber4" ColumnName="state_rubber4" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="Employee_id" ColumnName="Employee_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inspection_employee">
+            <EntityTypeMapping TypeName="RentCarModel.Inspection_employee">
+              <MappingFragment StoreEntitySet="Inspection_employee">
+                <ScalarProperty Name="inspection_employee_id" ColumnName="inspection_employee_id" />
+                <ScalarProperty Name="Employee_id" ColumnName="Employee_id" />
+                <ScalarProperty Name="Inspection_id" ColumnName="Inspection_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Model_car">
+            <EntityTypeMapping TypeName="RentCarModel.Model_car">
+              <MappingFragment StoreEntitySet="Model_car">
+                <ScalarProperty Name="Model_id" ColumnName="Model_id" />
+                <ScalarProperty Name="Brand_id" ColumnName="Brand_id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rent_Devolution">
+            <EntityTypeMapping TypeName="RentCarModel.Rent_Devolution">
+              <MappingFragment StoreEntitySet="Rent_Devolution">
+                <ScalarProperty Name="Rent_id" ColumnName="Rent_id" />
+                <ScalarProperty Name="Employee_id" ColumnName="Employee_id" />
+                <ScalarProperty Name="Car_id" ColumnName="Car_id" />
+                <ScalarProperty Name="Client_id" ColumnName="Client_id" />
+                <ScalarProperty Name="date_rent" ColumnName="date_rent" />
+                <ScalarProperty Name="date_devolution" ColumnName="date_devolution" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="days" ColumnName="days" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="RentCarModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_car">
+            <EntityTypeMapping TypeName="RentCarModel.Type_car">
+              <MappingFragment StoreEntitySet="Type_car">
+                <ScalarProperty Name="Type_car_id" ColumnName="Type_car_id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_fuel">
+            <EntityTypeMapping TypeName="RentCarModel.Type_fuel">
+              <MappingFragment StoreEntitySet="Type_fuel">
+                <ScalarProperty Name="Fuel_id" ColumnName="Fuel_id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="RentCarModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="Employee_id" ColumnName="Employee_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
