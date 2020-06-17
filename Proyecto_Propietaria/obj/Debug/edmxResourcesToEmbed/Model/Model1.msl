@@ -57,7 +57,6 @@
           <ScalarProperty Name="Car_id" ColumnName="Car_id" />
           <ScalarProperty Name="Client_id" ColumnName="Client_id" />
           <ScalarProperty Name="is_dent" ColumnName="is_dent" />
-          <ScalarProperty Name="Fuel_id" ColumnName="Fuel_id" />
           <ScalarProperty Name="replacement_rubber" ColumnName="replacement_rubber" />
           <ScalarProperty Name="is_gat" ColumnName="is_gat" />
           <ScalarProperty Name="is_broken_glass" ColumnName="is_broken_glass" />
@@ -69,6 +68,16 @@
           <ScalarProperty Name="date" ColumnName="date" />
           <ScalarProperty Name="state" ColumnName="state" />
           <ScalarProperty Name="Employee_id" ColumnName="Employee_id" />
+          <ScalarProperty Name="Fuel_level" ColumnName="Fuel_level" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Inspection_employee">
+      <EntityTypeMapping TypeName="RentCarModel.Inspection_employee">
+        <MappingFragment StoreEntitySet="Inspection_employee">
+          <ScalarProperty Name="inspection_employee_id" ColumnName="inspection_employee_id" />
+          <ScalarProperty Name="Employee_id" ColumnName="Employee_id" />
+          <ScalarProperty Name="Inspection_id" ColumnName="Inspection_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -93,8 +102,9 @@
           <ScalarProperty Name="date_devolution" ColumnName="date_devolution" />
           <ScalarProperty Name="Cost" ColumnName="Cost" />
           <ScalarProperty Name="days" ColumnName="days" />
-          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Comment_devolution" ColumnName="Comment_devolution" />
           <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="inspection" ColumnName="inspection" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

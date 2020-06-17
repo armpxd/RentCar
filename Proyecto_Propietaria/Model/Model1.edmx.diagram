@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c543f6cb633b4cd58acbb3dda6e7222a" Name="Diagram1">
+      <Diagram DiagramId="ffaabc970e43474e81d28a2baf02304c" Name="Diagram1">
         <EntityTypeShape EntityType="RentCarModel.Brand" Width="1.5" PointX="1.5" PointY="13.25" IsExpanded="true" />
         <EntityTypeShape EntityType="RentCarModel.Car" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentCarModel.Client" Width="1.5" PointX="0.75" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarModel.Client" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="RentCarModel.Employee" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentCarModel.Inspection" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarModel.Inspection" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="RentCarModel.Inspection_employee" Width="1.5" PointX="8.25" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="RentCarModel.Model_car" Width="1.5" PointX="3.75" PointY="13.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentCarModel.Rent_Devolution" Width="1.5" PointX="6" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarModel.Rent_Devolution" Width="1.5" PointX="6" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="RentCarModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="RentCarModel.Type_car" Width="1.5" PointX="1.5" PointY="22" IsExpanded="true" />
         <EntityTypeShape EntityType="RentCarModel.Type_fuel" Width="1.5" PointX="1.5" PointY="24.5" IsExpanded="true" />
@@ -31,7 +31,6 @@
         <AssociationConnector Association="RentCarModel.FK_Rent_Devolution_Employee" ManuallyRouted="false" />
         <AssociationConnector Association="RentCarModel.FK_User_Employee" ManuallyRouted="false" />
         <AssociationConnector Association="RentCarModel.FK_Inspection_employee_Inspection" ManuallyRouted="false" />
-        <AssociationConnector Association="RentCarModel.FK_Inspection_Type_fuel" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

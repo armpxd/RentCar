@@ -39,11 +39,20 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="NReco.PdfGenerator, Version=1.1.15.0, Culture=neutral, PublicKeyToken=231663d50a41b451, processorArchitecture=MSIL">
+      <HintPath>..\packages\NReco.PdfGenerator.1.1.15\lib\net20\NReco.PdfGenerator.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.10.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.10.0\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -112,11 +121,29 @@
     <Compile Include="Model\User.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Renta\DetalleVerRenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Renta\DetalleVerRenta.Designer.cs">
+      <DependentUpon>DetalleVerRenta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Renta\devolucion\Devolucion.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Renta\devolucion\Devolucion.Designer.cs">
       <DependentUpon>Devolucion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Renta\VerRentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Renta\VerRentas.Designer.cs">
+      <DependentUpon>VerRentas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Reports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Reports.Designer.cs">
+      <DependentUpon>Reports.cs</DependentUpon>
     </Compile>
     <Compile Include="Utility\Utility.cs" />
     <Compile Include="Mantenimiento\Cliente\Cliente_crear_editar.cs">
@@ -305,6 +332,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Renta\DetalleVerRenta.resx">
+      <DependentUpon>DetalleVerRenta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Renta\devolucion\Devolucion_main.resx">
       <DependentUpon>Devolucion_main.cs</DependentUpon>
     </EmbeddedResource>
@@ -314,8 +344,14 @@
     <EmbeddedResource Include="Renta\Inspeccionar.resx">
       <DependentUpon>Inspeccionar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Renta\VerRentas.resx">
+      <DependentUpon>VerRentas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Renta\Renta_main.resx">
       <DependentUpon>Renta_main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Reports.resx">
+      <DependentUpon>Reports.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Model\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -334,6 +370,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Reports\ReporteDeRenta.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Reports\ReportePorFecha.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Reports\ReporteRenta.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

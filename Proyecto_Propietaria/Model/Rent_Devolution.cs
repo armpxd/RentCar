@@ -22,8 +22,9 @@ namespace Proyecto_Propietaria.Model
         public Nullable<System.DateTime> date_devolution { get; set; }
         public int Cost { get; set; }
         public int days { get; set; }
-        public string Comment { get; set; }
+        public string Comment_devolution { get; set; }
         public bool State { get; set; }
+        public Nullable<int> inspection { get; set; }
     
         public virtual Car Car { get; set; }
         public virtual Client Client { get; set; }

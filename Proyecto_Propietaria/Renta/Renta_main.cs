@@ -46,7 +46,7 @@ namespace Proyecto_Propietaria
                       Vehiculo = x.Type_car.Description,
                       Marca = x.Brand.Description,
                       Tipo_Combustible = x.Type_fuel.Description,
-                      Estado = x.State ? "Activo": "Desactivado"
+                      Estado = x.State ? "Activo" : "Desactivado"
                   }).ToList();
 
                 dataGridView1.DataSource = car;
@@ -74,6 +74,34 @@ namespace Proyecto_Propietaria
             inspeccionar.ShowDialog();
             reload();
 
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox1.Text))
+            {
+                reload();
+            }
+            using (RentCarEntities db = new RentCarEntities())
+            {
+                var renta = db.Rent_Devolution.Where(x => (x.State == true) && (x.Client.Name.Contains(textBox1.Text) || x.Car.Description.Contains(textBox1.Text)
+                                                       || x.Car.Chassis.Contains(textBox1.Text) || x.Car.license_plate.Contains(textBox1.Text)
+                                                       || x.Employee.Name.Contains(textBox1.Text)
+                    )).Select(
+                          x => new
+                          {
+                              Id = x.Rent_id,
+                              Cliente = x.Client.Name,
+                              vehiculo = x.Car.Description,
+                              Chasis = x.Car.Chassis,
+                              Placa = x.Car.license_plate,
+                              Empleado = x.Employee.Name,
+                              Tipo_Combustible = x.Car.Type_fuel.Description,
+                              Estado = x.State ? "Activo" : "Desactivado"
+                          }).ToList();
+
+                dataGridView1.DataSource = renta;
+            }
         }
     }
 }

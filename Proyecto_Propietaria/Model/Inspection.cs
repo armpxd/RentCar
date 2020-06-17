@@ -24,7 +24,6 @@ namespace Proyecto_Propietaria.Model
         public int Car_id { get; set; }
         public int Client_id { get; set; }
         public bool is_dent { get; set; }
-        public string Fuel_id { get; set; }
         public bool replacement_rubber { get; set; }
         public bool is_gat { get; set; }
         public bool is_broken_glass { get; set; }
@@ -36,6 +35,7 @@ namespace Proyecto_Propietaria.Model
         public System.DateTime date { get; set; }
         public bool state { get; set; }
         public int Employee_id { get; set; }
+        public string Fuel_level { get; set; }
     
         public virtual Car Car { get; set; }
         public virtual Client Client { get; set; }
@@ -43,6 +43,5 @@ namespace Proyecto_Propietaria.Model
         public virtual Employee Employee1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspection_employee> Inspection_employee { get; set; }
-        public virtual Type_fuel Type_fuel { get; set; }
     }
 }

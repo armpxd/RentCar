@@ -48,6 +48,8 @@
             this.verRentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.devolucionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.devolucionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buscarReportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,7 +66,8 @@
             this.inicioToolStripMenuItem,
             this.mantenimientoToolStripMenuItem,
             this.rentaToolStripMenuItem,
-            this.devolucionToolStripMenuItem});
+            this.devolucionToolStripMenuItem,
+            this.reportesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(808, 28);
@@ -176,15 +179,16 @@
             // rentarVehiculoToolStripMenuItem
             // 
             this.rentarVehiculoToolStripMenuItem.Name = "rentarVehiculoToolStripMenuItem";
-            this.rentarVehiculoToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
+            this.rentarVehiculoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.rentarVehiculoToolStripMenuItem.Text = "Crear Renta";
             this.rentarVehiculoToolStripMenuItem.Click += new System.EventHandler(this.rentarVehiculoToolStripMenuItem_Click);
             // 
             // verRentasToolStripMenuItem
             // 
             this.verRentasToolStripMenuItem.Name = "verRentasToolStripMenuItem";
-            this.verRentasToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
+            this.verRentasToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.verRentasToolStripMenuItem.Text = "Ver Rentas";
+            this.verRentasToolStripMenuItem.Click += new System.EventHandler(this.verRentasToolStripMenuItem_Click);
             // 
             // devolucionToolStripMenuItem
             // 
@@ -197,9 +201,24 @@
             // devolucionToolStripMenuItem1
             // 
             this.devolucionToolStripMenuItem1.Name = "devolucionToolStripMenuItem1";
-            this.devolucionToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.devolucionToolStripMenuItem1.Size = new System.Drawing.Size(167, 26);
             this.devolucionToolStripMenuItem1.Text = "Devolucion";
             this.devolucionToolStripMenuItem1.Click += new System.EventHandler(this.devolucionToolStripMenuItem1_Click);
+            // 
+            // reportesToolStripMenuItem
+            // 
+            this.reportesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buscarReportesToolStripMenuItem});
+            this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
+            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(82, 24);
+            this.reportesToolStripMenuItem.Text = "Reportes";
+            // 
+            // buscarReportesToolStripMenuItem
+            // 
+            this.buscarReportesToolStripMenuItem.Name = "buscarReportesToolStripMenuItem";
+            this.buscarReportesToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.buscarReportesToolStripMenuItem.Text = "Buscar reportes";
+            this.buscarReportesToolStripMenuItem.Click += new System.EventHandler(this.buscarReportesToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -239,6 +258,8 @@
         private System.Windows.Forms.ToolStripMenuItem verRentasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem devolucionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem devolucionToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem reportesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem buscarReportesToolStripMenuItem;
     }
 }
 

@@ -114,6 +114,7 @@
             // combovehiculo
             // 
             this.combovehiculo.Cursor = System.Windows.Forms.Cursors.No;
+            this.combovehiculo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.combovehiculo.FormattingEnabled = true;
             this.combovehiculo.Location = new System.Drawing.Point(195, 197);
             this.combovehiculo.Name = "combovehiculo";
@@ -173,6 +174,7 @@
             // comboMarca
             // 
             this.comboMarca.Cursor = System.Windows.Forms.Cursors.No;
+            this.comboMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboMarca.FormattingEnabled = true;
             this.comboMarca.Location = new System.Drawing.Point(195, 239);
             this.comboMarca.Name = "comboMarca";
@@ -191,6 +193,7 @@
             // comboFuel
             // 
             this.comboFuel.Cursor = System.Windows.Forms.Cursors.No;
+            this.comboFuel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboFuel.FormattingEnabled = true;
             this.comboFuel.Location = new System.Drawing.Point(195, 275);
             this.comboFuel.Name = "comboFuel";
@@ -220,6 +223,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Vehiculo_crear_editar";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Modelo_crear_editar_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

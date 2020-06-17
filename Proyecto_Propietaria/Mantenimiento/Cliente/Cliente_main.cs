@@ -102,5 +102,30 @@ namespace Proyecto_Propietaria
             
 
             }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox1.Text))
+            {
+                reload();
+            }
+
+            using (RentCarEntities db = new RentCarEntities())
+            {
+                var cliente = db.Client.Where(x => x.Name.Contains(textBox1.Text) || x.Identification_card.Contains(textBox1.Text)).Select(
+                  x => new
+                  {
+                      Id = x.Client_id,
+                      Nombre = x.Name,
+                      Cedula = x.Identification_card,
+                      Tarjeta = x.credit_card,
+                      Limite = x.credit_limit,
+                      Tipo = x.Person_type.Trim(),
+                      Estado = x.State ? "Activo" : "Desactivado"
+                  }).ToList();
+
+                dataGridView1.DataSource = cliente;
+            }
+        }
     }
 }

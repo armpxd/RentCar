@@ -23,7 +23,7 @@
           <Property Name="license_plate" Type="nchar" MaxLength="25" Nullable="false" />
           <Property Name="Type_car_id" Type="int" Nullable="false" />
           <Property Name="Brand_id" Type="int" Nullable="false" />
-          <Property Name="Fuel_id" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Fuel_id" Type="int" Nullable="false" />
           <Property Name="State" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Client">
@@ -58,7 +58,6 @@
           <Property Name="Car_id" Type="int" Nullable="false" />
           <Property Name="Client_id" Type="int" Nullable="false" />
           <Property Name="is_dent" Type="bit" Nullable="false" />
-          <Property Name="Fuel_id" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="replacement_rubber" Type="bit" Nullable="false" />
           <Property Name="is_gat" Type="bit" Nullable="false" />
           <Property Name="is_broken_glass" Type="bit" Nullable="false" />
@@ -70,6 +69,7 @@
           <Property Name="date" Type="date" Nullable="false" />
           <Property Name="state" Type="bit" Nullable="false" />
           <Property Name="Employee_id" Type="int" Nullable="false" />
+          <Property Name="Fuel_level" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="Inspection_employee">
           <Key>
@@ -100,8 +100,9 @@
           <Property Name="date_devolution" Type="date" />
           <Property Name="Cost" Type="int" Nullable="false" />
           <Property Name="days" Type="int" Nullable="false" />
-          <Property Name="Comment" Type="nchar" MaxLength="255" />
+          <Property Name="Comment_devolution" Type="nchar" MaxLength="255" />
           <Property Name="State" Type="bit" Nullable="false" />
+          <Property Name="inspection" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -125,7 +126,7 @@
           <Key>
             <PropertyRef Name="Fuel_id" />
           </Key>
-          <Property Name="Fuel_id" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Fuel_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="nchar" MaxLength="20" Nullable="false" />
           <Property Name="State" Type="bit" Nullable="false" />
         </EntityType>
@@ -133,7 +134,7 @@
           <Key>
             <PropertyRef Name="User_id" />
           </Key>
-          <Property Name="User_id" Type="int" Nullable="false" />
+          <Property Name="User_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="nchar" MaxLength="15" Nullable="false" />
           <Property Name="Password" Type="nchar" MaxLength="30" Nullable="false" />
           <Property Name="CreateDate" Type="date" Nullable="false" />
@@ -248,18 +249,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Inspection_Type_fuel">
-          <End Role="Type_fuel" Type="Self.Type_fuel" Multiplicity="1" />
-          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Type_fuel">
-              <PropertyRef Name="Fuel_id" />
-            </Principal>
-            <Dependent Role="Inspection">
-              <PropertyRef Name="Fuel_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Model_Brand">
           <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
           <End Role="Model_car" Type="Self.Model_car" Multiplicity="*" />
@@ -369,10 +358,6 @@
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Inspection" EntitySet="Inspection" />
           </AssociationSet>
-          <AssociationSet Name="FK_Inspection_Type_fuel" Association="Self.FK_Inspection_Type_fuel">
-            <End Role="Type_fuel" EntitySet="Type_fuel" />
-            <End Role="Inspection" EntitySet="Inspection" />
-          </AssociationSet>
           <AssociationSet Name="FK_Model_Brand" Association="Self.FK_Model_Brand">
             <End Role="Brand" EntitySet="Brand" />
             <End Role="Model_car" EntitySet="Model_car" />
@@ -419,7 +404,7 @@
           <Property Name="license_plate" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Type_car_id" Type="Int32" Nullable="false" />
           <Property Name="Brand_id" Type="Int32" Nullable="false" />
-          <Property Name="Fuel_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Fuel_id" Type="Int32" Nullable="false" />
           <Property Name="State" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Brand" Relationship="Self.FK_Car_Brand" FromRole="Car" ToRole="Brand" />
           <NavigationProperty Name="Type_car" Relationship="Self.FK_Car_Type_car" FromRole="Car" ToRole="Type_car" />
@@ -466,7 +451,6 @@
           <Property Name="Car_id" Type="Int32" Nullable="false" />
           <Property Name="Client_id" Type="Int32" Nullable="false" />
           <Property Name="is_dent" Type="Boolean" Nullable="false" />
-          <Property Name="Fuel_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="replacement_rubber" Type="Boolean" Nullable="false" />
           <Property Name="is_gat" Type="Boolean" Nullable="false" />
           <Property Name="is_broken_glass" Type="Boolean" Nullable="false" />
@@ -478,12 +462,12 @@
           <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="state" Type="Boolean" Nullable="false" />
           <Property Name="Employee_id" Type="Int32" Nullable="false" />
+          <Property Name="Fuel_level" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Car" Relationship="Self.FK_Inspection_Car" FromRole="Inspection" ToRole="Car" />
           <NavigationProperty Name="Client" Relationship="Self.FK_Inspection_Client" FromRole="Inspection" ToRole="Client" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Inspection_Employee" FromRole="Inspection" ToRole="Employee" />
           <NavigationProperty Name="Employee1" Relationship="Self.FK_Inspection_Employee1" FromRole="Inspection" ToRole="Employee" />
           <NavigationProperty Name="Inspection_employee" Relationship="Self.FK_Inspection_employee_Inspection" FromRole="Inspection" ToRole="Inspection_employee" />
-          <NavigationProperty Name="Type_fuel" Relationship="Self.FK_Inspection_Type_fuel" FromRole="Inspection" ToRole="Type_fuel" />
         </EntityType>
         <EntityType Name="Inspection_employee">
           <Key>
@@ -517,8 +501,9 @@
           <Property Name="date_devolution" Type="DateTime" Precision="0" />
           <Property Name="Cost" Type="Int32" Nullable="false" />
           <Property Name="days" Type="Int32" Nullable="false" />
-          <Property Name="Comment" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="Comment_devolution" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
           <Property Name="State" Type="Boolean" Nullable="false" />
+          <Property Name="inspection" Type="Int32" />
           <NavigationProperty Name="Car" Relationship="Self.FK_Rent_Devolution_Car" FromRole="Rent_Devolution" ToRole="Car" />
           <NavigationProperty Name="Client" Relationship="Self.FK_Rent_Devolution_Client" FromRole="Rent_Devolution" ToRole="Client" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Rent_Devolution_Employee" FromRole="Rent_Devolution" ToRole="Employee" />
@@ -546,17 +531,16 @@
           <Key>
             <PropertyRef Name="Fuel_id" />
           </Key>
-          <Property Name="Fuel_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Fuel_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="State" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Car" Relationship="Self.FK_Car_Type_fuel" FromRole="Type_fuel" ToRole="Car" />
-          <NavigationProperty Name="Inspection" Relationship="Self.FK_Inspection_Type_fuel" FromRole="Type_fuel" ToRole="Inspection" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="User_id" />
           </Key>
-          <Property Name="User_id" Type="Int32" Nullable="false" />
+          <Property Name="User_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserName" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
@@ -732,18 +716,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Inspection_Type_fuel">
-          <End Role="Type_fuel" Type="Self.Type_fuel" Multiplicity="1" />
-          <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Type_fuel">
-              <PropertyRef Name="Fuel_id" />
-            </Principal>
-            <Dependent Role="Inspection">
-              <PropertyRef Name="Fuel_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="RentCarEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Brand" EntityType="Self.Brand" />
           <EntitySet Name="Car" EntityType="Self.Car" />
@@ -813,10 +785,6 @@
             <End Role="Inspection" EntitySet="Inspection" />
             <End Role="Inspection_employee" EntitySet="Inspection_employee" />
           </AssociationSet>
-          <AssociationSet Name="FK_Inspection_Type_fuel" Association="Self.FK_Inspection_Type_fuel">
-            <End Role="Type_fuel" EntitySet="Type_fuel" />
-            <End Role="Inspection" EntitySet="Inspection" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -880,7 +848,6 @@
                 <ScalarProperty Name="Car_id" ColumnName="Car_id" />
                 <ScalarProperty Name="Client_id" ColumnName="Client_id" />
                 <ScalarProperty Name="is_dent" ColumnName="is_dent" />
-                <ScalarProperty Name="Fuel_id" ColumnName="Fuel_id" />
                 <ScalarProperty Name="replacement_rubber" ColumnName="replacement_rubber" />
                 <ScalarProperty Name="is_gat" ColumnName="is_gat" />
                 <ScalarProperty Name="is_broken_glass" ColumnName="is_broken_glass" />
@@ -892,6 +859,7 @@
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="state" ColumnName="state" />
                 <ScalarProperty Name="Employee_id" ColumnName="Employee_id" />
+                <ScalarProperty Name="Fuel_level" ColumnName="Fuel_level" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -925,8 +893,9 @@
                 <ScalarProperty Name="date_devolution" ColumnName="date_devolution" />
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="days" ColumnName="days" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Comment_devolution" ColumnName="Comment_devolution" />
                 <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="inspection" ColumnName="inspection" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -125,6 +125,7 @@
             this.textBoxCedula.Name = "textBoxCedula";
             this.textBoxCedula.Size = new System.Drawing.Size(187, 22);
             this.textBoxCedula.TabIndex = 8;
+            this.textBoxCedula.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCedula_KeyPress);
             // 
             // labelTarjetCR
             // 
@@ -141,6 +142,7 @@
             this.textBoxTarjetaCR.Name = "textBoxTarjetaCR";
             this.textBoxTarjetaCR.Size = new System.Drawing.Size(187, 22);
             this.textBoxTarjetaCR.TabIndex = 10;
+            this.textBoxTarjetaCR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTarjetaCR_KeyPress);
             // 
             // labelLimiteCredito
             // 
@@ -162,6 +164,7 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "Fisica",

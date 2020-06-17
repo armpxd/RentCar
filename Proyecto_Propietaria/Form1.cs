@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Proyecto_Propietaria.Login;
+using Proyecto_Propietaria.Report;
+
+
 namespace Proyecto_Propietaria
 {
     public partial class Form1 : Form
@@ -89,7 +92,19 @@ namespace Proyecto_Propietaria
         private void devolucionToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Devolucion_main devolucion = new Devolucion_main();
-            devolucion.Show();
+            devolucion.ShowDialog();
+        }
+
+        private void buscarReportesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Reports reporteria = new Reports();
+            reporteria.ShowDialog();
+        }
+
+        private void verRentasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VerRentas verRentas = new VerRentas();
+            verRentas.ShowDialog();
         }
     }
 }

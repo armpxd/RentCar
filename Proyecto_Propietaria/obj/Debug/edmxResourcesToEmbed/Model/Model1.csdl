@@ -54,6 +54,7 @@
     <Property Name="date_admission" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="State" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Inspection" Relationship="Self.FK_Inspection_Employee" FromRole="Employee" ToRole="Inspection" />
+    <NavigationProperty Name="Inspection_employee" Relationship="Self.FK_Inspection_employee_Employee" FromRole="Employee" ToRole="Inspection_employee" />
     <NavigationProperty Name="Inspection1" Relationship="Self.FK_Inspection_Employee1" FromRole="Employee" ToRole="Inspection" />
     <NavigationProperty Name="Rent_Devolution" Relationship="Self.FK_Rent_Devolution_Employee" FromRole="Employee" ToRole="Rent_Devolution" />
     <NavigationProperty Name="User" Relationship="Self.FK_User_Employee" FromRole="Employee" ToRole="User" />
@@ -66,7 +67,6 @@
     <Property Name="Car_id" Type="Int32" Nullable="false" />
     <Property Name="Client_id" Type="Int32" Nullable="false" />
     <Property Name="is_dent" Type="Boolean" Nullable="false" />
-    <Property Name="Fuel_id" Type="Int32" Nullable="false" />
     <Property Name="replacement_rubber" Type="Boolean" Nullable="false" />
     <Property Name="is_gat" Type="Boolean" Nullable="false" />
     <Property Name="is_broken_glass" Type="Boolean" Nullable="false" />
@@ -78,11 +78,22 @@
     <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="state" Type="Boolean" Nullable="false" />
     <Property Name="Employee_id" Type="Int32" Nullable="false" />
+    <Property Name="Fuel_level" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Car" Relationship="Self.FK_Inspection_Car" FromRole="Inspection" ToRole="Car" />
     <NavigationProperty Name="Client" Relationship="Self.FK_Inspection_Client" FromRole="Inspection" ToRole="Client" />
     <NavigationProperty Name="Employee" Relationship="Self.FK_Inspection_Employee" FromRole="Inspection" ToRole="Employee" />
     <NavigationProperty Name="Employee1" Relationship="Self.FK_Inspection_Employee1" FromRole="Inspection" ToRole="Employee" />
-    <NavigationProperty Name="Type_fuel" Relationship="Self.FK_Inspection_Type_fuel" FromRole="Inspection" ToRole="Type_fuel" />
+    <NavigationProperty Name="Inspection_employee" Relationship="Self.FK_Inspection_employee_Inspection" FromRole="Inspection" ToRole="Inspection_employee" />
+  </EntityType>
+  <EntityType Name="Inspection_employee">
+    <Key>
+      <PropertyRef Name="inspection_employee_id" />
+    </Key>
+    <Property Name="inspection_employee_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Employee_id" Type="Int32" Nullable="false" />
+    <Property Name="Inspection_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_Inspection_employee_Employee" FromRole="Inspection_employee" ToRole="Employee" />
+    <NavigationProperty Name="Inspection" Relationship="Self.FK_Inspection_employee_Inspection" FromRole="Inspection_employee" ToRole="Inspection" />
   </EntityType>
   <EntityType Name="Model_car">
     <Key>
@@ -106,8 +117,9 @@
     <Property Name="date_devolution" Type="DateTime" Precision="0" />
     <Property Name="Cost" Type="Int32" Nullable="false" />
     <Property Name="days" Type="Int32" Nullable="false" />
-    <Property Name="Comment" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+    <Property Name="Comment_devolution" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
     <Property Name="State" Type="Boolean" Nullable="false" />
+    <Property Name="inspection" Type="Int32" />
     <NavigationProperty Name="Car" Relationship="Self.FK_Rent_Devolution_Car" FromRole="Rent_Devolution" ToRole="Car" />
     <NavigationProperty Name="Client" Relationship="Self.FK_Rent_Devolution_Client" FromRole="Rent_Devolution" ToRole="Client" />
     <NavigationProperty Name="Employee" Relationship="Self.FK_Rent_Devolution_Employee" FromRole="Rent_Devolution" ToRole="Employee" />
@@ -139,13 +151,12 @@
     <Property Name="Description" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="State" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Car" Relationship="Self.FK_Car_Type_fuel" FromRole="Type_fuel" ToRole="Car" />
-    <NavigationProperty Name="Inspection" Relationship="Self.FK_Inspection_Type_fuel" FromRole="Type_fuel" ToRole="Inspection" />
   </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="User_id" />
     </Key>
-    <Property Name="User_id" Type="Int32" Nullable="false" />
+    <Property Name="User_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserName" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="Password" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
@@ -261,6 +272,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Inspection_employee_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Inspection_employee" Type="Self.Inspection_employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Employee_id" />
+      </Principal>
+      <Dependent Role="Inspection_employee">
+        <PropertyRef Name="Employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Inspection_Employee1">
     <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
     <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
@@ -297,15 +320,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Inspection_Type_fuel">
-    <End Role="Type_fuel" Type="Self.Type_fuel" Multiplicity="1" />
-    <End Role="Inspection" Type="Self.Inspection" Multiplicity="*" />
+  <Association Name="FK_Inspection_employee_Inspection">
+    <End Role="Inspection" Type="Self.Inspection" Multiplicity="1" />
+    <End Role="Inspection_employee" Type="Self.Inspection_employee" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Type_fuel">
-        <PropertyRef Name="Fuel_id" />
+      <Principal Role="Inspection">
+        <PropertyRef Name="Inspection_id" />
       </Principal>
-      <Dependent Role="Inspection">
-        <PropertyRef Name="Fuel_id" />
+      <Dependent Role="Inspection_employee">
+        <PropertyRef Name="Inspection_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -315,6 +338,7 @@
     <EntitySet Name="Client" EntityType="Self.Client" />
     <EntitySet Name="Employee" EntityType="Self.Employee" />
     <EntitySet Name="Inspection" EntityType="Self.Inspection" />
+    <EntitySet Name="Inspection_employee" EntityType="Self.Inspection_employee" />
     <EntitySet Name="Model_car" EntityType="Self.Model_car" />
     <EntitySet Name="Rent_Devolution" EntityType="Self.Rent_Devolution" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
@@ -357,6 +381,10 @@
       <End Role="Employee" EntitySet="Employee" />
       <End Role="Inspection" EntitySet="Inspection" />
     </AssociationSet>
+    <AssociationSet Name="FK_Inspection_employee_Employee" Association="Self.FK_Inspection_employee_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Inspection_employee" EntitySet="Inspection_employee" />
+    </AssociationSet>
     <AssociationSet Name="FK_Inspection_Employee1" Association="Self.FK_Inspection_Employee1">
       <End Role="Employee" EntitySet="Employee" />
       <End Role="Inspection" EntitySet="Inspection" />
@@ -369,9 +397,9 @@
       <End Role="Employee" EntitySet="Employee" />
       <End Role="User" EntitySet="User" />
     </AssociationSet>
-    <AssociationSet Name="FK_Inspection_Type_fuel" Association="Self.FK_Inspection_Type_fuel">
-      <End Role="Type_fuel" EntitySet="Type_fuel" />
+    <AssociationSet Name="FK_Inspection_employee_Inspection" Association="Self.FK_Inspection_employee_Inspection">
       <End Role="Inspection" EntitySet="Inspection" />
+      <End Role="Inspection_employee" EntitySet="Inspection_employee" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

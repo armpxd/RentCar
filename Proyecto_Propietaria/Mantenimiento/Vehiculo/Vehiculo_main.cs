@@ -102,5 +102,34 @@ namespace Proyecto_Propietaria
             
 
             }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox1.Text))
+            {
+                reload();
+            }
+
+            using (RentCarEntities db = new RentCarEntities())
+            {
+                var car = db.Car.Where(x => x.Description.Contains(textBox1.Text) || x.Type_car.Description.Contains(textBox1.Text)
+                                        || x.Chassis.Contains(textBox1.Text) || x.license_plate.Contains(textBox1.Text) 
+                                        || x.Brand.Description.Contains(textBox1.Text))
+                    .Select(
+                        x => new
+                        {
+                            Id = x.Car_id,
+                            Description = x.Description,
+                            Chasis = x.Chassis,
+                            Placa = x.license_plate,
+                            Tipo_de_Vehiculo = x.Type_car.Description,
+                            Marca = x.Brand.Description,
+                            Combustible = x.Type_fuel.Description,
+                            Estado = x.State ? "Activo" : "Inactivo"
+                        }).ToList();
+
+                dataGridView2.DataSource = car;
+            }
+        }
     }
 }

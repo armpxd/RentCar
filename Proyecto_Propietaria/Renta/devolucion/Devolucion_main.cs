@@ -36,22 +36,20 @@ namespace Proyecto_Propietaria
         {
             using (RentCarEntities db = new RentCarEntities())
             {
-                var rentas = db.Rent_Devolution.Where(y=> y.State == true).Select(x => x.Car_id).ToList();
-
-                var car = db.Car.Where(x => rentas.Contains(x.Car_id)).Select(
+                var renta = db.Rent_Devolution.Where(x => x.State == true).Select(
                   x => new
                   {
-                      Id = x.Car_id,
-                      Descripcion = x.Description,
-                      Chasis = x.Chassis,
-                      Placa = x.license_plate,
-                      Vehiculo = x.Type_car.Description,
-                      Marca = x.Brand.Description,
-                      Tipo_Combustible = x.Type_fuel.Description,
-                      Estado = x.State ? "Activo": "Desactivado"
+                      Id = x.Rent_id,
+                      Cliente = x.Client.Name,
+                      vehiculo = x.Car.Description,
+                      Chasis = x.Car.Chassis,
+                      Placa = x.Car.license_plate,
+                      Empleado = x.Employee.Name,
+                      Tipo_Combustible = x.Car.Type_fuel.Description,
+                      Estado = x.State ? "Activo" : "Desactivado"
                   }).ToList();
 
-                dataGridView1.DataSource = car;
+                dataGridView1.DataSource = renta;
             }
         }
 
@@ -71,6 +69,36 @@ namespace Proyecto_Propietaria
         private void button1_Click(object sender, EventArgs e)
         {
             int? id = GetId();
+            Devolucion devolucion = new Devolucion(id);
+            devolucion.ShowDialog();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox1.Text))
+            {
+                reload();
+            }
+             using (RentCarEntities db = new RentCarEntities())
+            {
+                var renta = db.Rent_Devolution.Where(x => (x.State == true) && (x.Client.Name.Contains(textBox1.Text) || x.Car.Description.Contains(textBox1.Text)
+                                                       || x.Car.Chassis.Contains(textBox1.Text) || x.Car.license_plate.Contains(textBox1.Text)
+                                                       || x.Employee.Name.Contains(textBox1.Text) 
+                    )).Select(
+                          x => new
+                          {
+                              Id = x.Rent_id,
+                              Cliente = x.Client.Name,
+                              vehiculo = x.Car.Description,
+                              Chasis = x.Car.Chassis,
+                              Placa = x.Car.license_plate,
+                              Empleado = x.Employee.Name,
+                              Tipo_Combustible = x.Car.Type_fuel.Description,
+                              Estado = x.State ? "Activo" : "Desactivado"
+                          }).ToList();
+
+                dataGridView1.DataSource = renta;
+            }
         }
     }
 }

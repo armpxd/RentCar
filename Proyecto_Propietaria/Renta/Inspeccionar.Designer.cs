@@ -192,6 +192,7 @@
             // comboCliente
             // 
             this.comboCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboCliente.FormattingEnabled = true;
             this.comboCliente.Location = new System.Drawing.Point(187, 455);
             this.comboCliente.Name = "comboCliente";
@@ -236,12 +237,13 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(148, 654);
+            this.button1.Location = new System.Drawing.Point(159, 653);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(143, 49);
             this.button1.TabIndex = 51;
             this.button1.Text = "Rentar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // numericDayRent
             // 
@@ -255,6 +257,7 @@
             this.numericDayRent.Name = "numericDayRent";
             this.numericDayRent.Size = new System.Drawing.Size(153, 22);
             this.numericDayRent.TabIndex = 50;
+            this.numericDayRent.ValueChanged += new System.EventHandler(this.numericDayRent_ValueChanged_1);
             // 
             // label5
             // 
@@ -278,6 +281,7 @@
             this.numericPerDay.Name = "numericPerDay";
             this.numericPerDay.Size = new System.Drawing.Size(153, 22);
             this.numericPerDay.TabIndex = 48;
+            this.numericPerDay.ValueChanged += new System.EventHandler(this.numericPerDay_ValueChanged_1);
             // 
             // label4
             // 
@@ -308,6 +312,7 @@
             // 
             // comboCombustible
             // 
+            this.comboCombustible.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboCombustible.FormattingEnabled = true;
             this.comboCombustible.Items.AddRange(new object[] {
             "F",

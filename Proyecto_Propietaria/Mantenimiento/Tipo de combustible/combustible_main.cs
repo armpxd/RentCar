@@ -82,9 +82,9 @@ namespace Proyecto_Propietaria
             {
                 using (RentCarEntities db = new RentCarEntities())
                 {
-                    var target = db.Type_fuel.FirstOrDefault(x => x.Fuel_id == id);
+                    //var target = db.Type_fuel.FirstOrDefault(x => x.Fuel_id == id);
 
-                    target.State = false;
+                    //target.State = false;
                     db.SaveChanges();
                     MessageBox.Show("Se a desactivado correctamente");
                     reload();
@@ -98,5 +98,26 @@ namespace Proyecto_Propietaria
             
 
             }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox1.Text))
+            {
+                reload();
+            }
+
+            using (RentCarEntities db = new RentCarEntities())
+            {
+                var combustibles = db.Type_fuel.Where(x => x.Description.Contains(textBox1.Text)).Select(
+                  x => new
+                  {
+                      Id = x.Fuel_id,
+                      Descripcion = x.Description,
+                      Estado = x.State ? "Activo" : "Desactivado"
+                  }).ToList();
+
+                dataGridView1.DataSource = combustibles;
+            }
+        }
     }
 }

@@ -17,6 +17,7 @@ namespace Proyecto_Propietaria.Login
         public UserLogin()
         {
             InitializeComponent();
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -42,11 +43,15 @@ namespace Proyecto_Propietaria.Login
                     else
                     {
                         MessageBox.Show("Contraseña o Usuario Incorrecto");
+                        textPass.Clear();
+                        textUser.Clear();
                     }
                 }
                 else
                 {
                     MessageBox.Show("Contraseña o Usuario Incorrecto");
+                    textPass.Clear();
+                    textUser.Clear();
                 }
             }
                 

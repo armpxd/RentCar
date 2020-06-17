@@ -27,7 +27,7 @@ namespace Proyecto_Propietaria.Model
         public string license_plate { get; set; }
         public int Type_car_id { get; set; }
         public int Brand_id { get; set; }
-        public string Fuel_id { get; set; }
+        public int Fuel_id { get; set; }
         public bool State { get; set; }
     
         public virtual Brand Brand { get; set; }

@@ -26,20 +26,28 @@ namespace Proyecto_Propietaria.Renta
             this.employee = employe;
             using (RentCarEntities db = new RentCarEntities())
             {
-                comboCliente.DataSource = db.Client.Select(x => x.Name).ToList();
+                var renta = db.Rent_Devolution.FirstOrDefault(x => x.Rent_id == id);
+                var inspection = db.Inspection.FirstOrDefault(x => x.Inspection_id == renta.inspection);
+
+                checkg1.Checked = inspection.state_rubber1 ? checkg1.Checked = true : checkg1.Checked = false;
+                checkg2.Checked = inspection.state_rubber2 ? checkg2.Checked = true : checkg2.Checked = false;
+                checkg3.Checked = inspection.state_rubber3 ? checkg3.Checked = true : checkg3.Checked = false;
+                checkg4.Checked = inspection.state_rubber4 ? checkg4.Checked = true : checkg4.Checked = false;
+                checkgr.Checked = inspection.replacement_rubber ? checkgr.Checked = true : checkgr.Checked = false;
+                checkralladura.Checked = inspection.is_dent ? checkralladura.Checked = true : checkralladura.Checked = false;
+                checkGato.Checked = inspection.is_gat ? checkGato.Checked = true : checkGato.Checked = false;
+                checkVidrios.Checked = inspection.is_broken_glass ? checkVidrios.Checked = true : checkVidrios.Checked = false;
+                comboCombustible.Text = inspection.Fuel_level;
+                textBoxComentario.Text = inspection.comment;
+                dateTimePicker1.Value = renta.date_rent;
+                numericPerDay.Value = renta.Cost;
+                numericDayRent.Value = renta.days;
+                numericResult.Value = renta.Cost * renta.days;
+                comboCliente.Text = renta.Client.Name;
             }
 
         }
 
-        private void numericPerDay_ValueChanged_1(object sender, EventArgs e)
-        {
-            numericResult.Value = numericDayRent.Value * numericPerDay.Value;
-        }
-
-        private void numericDayRent_ValueChanged_1(object sender, EventArgs e)
-        {
-            numericResult.Value = numericDayRent.Value * numericPerDay.Value;
-        }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -48,40 +56,15 @@ namespace Proyecto_Propietaria.Renta
             {
                 using (RentCarEntities db = new RentCarEntities())
                 {
-                    Rent_Devolution renta = new Rent_Devolution();
-                    Inspection inspection = new Inspection();
-                    var carro = db.Car.FirstOrDefault(x => x.Car_id == id);
-                    var fuel = db.Type_fuel.FirstOrDefault(x => x.Description == comboCombustible.Text).Fuel_id;
-                    inspection.state_rubber1 = checkg1.Checked ? true : false;
-                    inspection.state_rubber2 = checkg2.Checked ? true : false;
-                    inspection.state_rubber3 = checkg3.Checked ? true : false;
-                    inspection.state_rubber4 = checkg4.Checked ? true : false;
-                    inspection.replacement_rubber = checkgr.Checked ? true : false;
-                    inspection.is_dent = checkralladura.Checked ? true : false;
-                    inspection.is_gat = checkGato.Checked ? true : false;
-                    inspection.is_broken_glass = checkVidrios.Checked ? true : false;
-                    inspection.comment = textBoxComentario.Text;
-                    inspection.Car_id = carro.Car_id;
-                    inspection.Fuel_id = fuel;
-                    inspection.Employee_id = (int)employee;
-                    inspection.Client_id = db.Client.FirstOrDefault(x=>x.Name == comboCliente.Text).Client_id;
+                    var renta = db.Rent_Devolution.FirstOrDefault(x => x.Rent_id == id);
 
-                    db.Inspection.Add(inspection);
-
-                    renta.date_rent = dateTimePicker1.Value;
-                    renta.Cost = (int)numericPerDay.Value;
-                    renta.days = (int)numericDayRent.Value;
-                    renta.Employee_id = (int)employee;
-                    renta.Car_id = carro.Car_id;
-                    renta.Client_id = db.Client.FirstOrDefault(x => x.Name == comboCliente.Text).Client_id;
-                    db.Rent_Devolution.Add(renta);
-
-
-                    carro.State = false;
+                    renta.date_devolution = dateTimePicker2.Value;
+                    renta.Comment_devolution = textdevolucion.Text;
+                    renta.State = false;
+                    renta.Car.State = true;
                     db.SaveChanges();
-                    MessageBox.Show("Renta realizada!");
+                    MessageBox.Show("Devolucion realizada!");
                     this.Close();
-
                 }
             }
             else if (dialogResult == DialogResult.No)

@@ -95,8 +95,27 @@ namespace Proyecto_Propietaria
             {
                 this.Close();
             }
-            
+        }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox1.Text))
+            {
+                reload();
             }
+            using (RentCarEntities db = new RentCarEntities())
+            {
+                var modelo = db.Model_car.Where(x => x.Description.Contains(textBox1.Text) || x.Brand.Description.Contains(textBox1.Text)).Select(
+                  x => new
+                  {
+                    Id = x.Model_id,
+                    Marca = x.Brand.Description,
+                    Descripcion = x.Description,
+                    Estado = x.State ? "Activo" : "Inactivo"
+                    }).ToList();
+
+                dataGridView2.DataSource = modelo;
+            }
+        }
     }
 }
